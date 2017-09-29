@@ -159,7 +159,7 @@ def check_tar_archive(tar_obj, md_checklist=None):
     return md_list, verified
 
 
-def compress_folder(source_fold, dest_path, dest_name, mode='w:'):
+def compress_folder(source_fold, dest_path, dest_name, mode='w:xz'):
     """
     Archives a folder into a tarfile into dest_name, named dest_name.ext (ext is automatically created)
     (dest_name is usually the name of the source folder)
