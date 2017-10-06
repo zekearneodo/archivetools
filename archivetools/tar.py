@@ -188,7 +188,7 @@ def compress_folder(source_fold, dest_path, dest_name, mode='w:xz'):
                     f = format(os.path.join(root, name))
                     arcname = os.path.normpath(os.path.relpath(f, start=source_fold))
                     # arcname = (os.path.join('.', root.split(source_fold)[-1], name))
-                    md5_f = md5(os.path.join(root, name))
+                    md5_f = md5(os.path.realpath(os.path.join(root, name)))
                     mdf.write('{0}, {1}\n'.format(arcname, md5_f))
                     logger.debug('Adding {0} as {1}'.format(f, arcname))
                     a.add(f, arcname=arcname)
