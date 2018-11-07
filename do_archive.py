@@ -5,6 +5,7 @@ import os
 import glob
 import argparse
 import logging
+import socket
 
 logger = logging.getLogger()
 
@@ -37,6 +38,7 @@ def main():
 
     args = get_args()
 
+    comp_name = socket.gethostname()
     dest_name = args.folder_name
     source_folder = os.path.abspath(os.path.join(args.source, dest_name))
     dest_folder = os.path.abspath(os.path.join(args.dest, dest_name))
@@ -61,6 +63,7 @@ def main():
     mkdir_p(dest_folder)
     mkdir_p(tmp_folder)
 
+    logger.info('Computer: ' + comp_name)
     logger.info('Created folders, beginning compression')
     # Do the compression
     dest_file, md5_arch, md_list = tt.compress_folder(source_folder,
@@ -83,6 +86,7 @@ def main():
     arc_files = glob.glob(os.path.join(tmp_folder, '*.*'))
     for f in arc_files:
         shutil.move(f, dest_folder)
+    logger.info('Done')
 
     # and If dared, actually remove the uncompressed data
     #shutil.rmtree(source_folder)
